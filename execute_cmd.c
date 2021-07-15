@@ -5161,7 +5161,7 @@ execute_disk_command (words, redirects, command_line, pipe_in, pipe_out,
       maybe_make_export_env ();
       put_command_name_into_env (command);
     }
-
+			
   /* We have to make the child before we check for the non-existence
      of COMMAND, since we want the error messages to be redirected. */
   /* If we can get away without forking and there are no pipes to deal with,
@@ -5224,7 +5224,7 @@ execute_disk_command (words, redirects, command_line, pipe_in, pipe_out,
 
 
 	  /* Check with TACACS+ Authorization */
-	  int authorization_result = tacacs_authorization(command);
+	  int authorization_result = tacacs_authorization(pathname);
 	  if (authorization_result != 0)
 	  {
 		  exit (EXECUTION_FAILURE);
