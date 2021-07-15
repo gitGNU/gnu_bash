@@ -5156,14 +5156,6 @@ execute_disk_command (words, redirects, command_line, pipe_in, pipe_out,
 #endif /* RESTRICTED_SHELL */
 
   command = search_for_command (pathname, CMDSRCH_HASH|(stdpath ? CMDSRCH_STDPATH : 0));
-  
-  /* Check with TACACS+ Authorization */
-  int authorization_result = tacacs_authorization(command);
-  if (authorization_result != 0)
-  {
-	  exit (EXECUTION_FAILURE);
-  }
-
   if (command)
     {
       maybe_make_export_env ();
@@ -5229,6 +5221,14 @@ execute_disk_command (words, redirects, command_line, pipe_in, pipe_out,
 
       if (async)
 	interactive = old_interactive;
+
+
+	  /* Check with TACACS+ Authorization */
+	  int authorization_result = tacacs_authorization(command);
+	  if (authorization_result != 0)
+	  {
+		  exit (EXECUTION_FAILURE);
+	  }
 
       if (command == 0)
 	{

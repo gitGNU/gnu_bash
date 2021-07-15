@@ -321,17 +321,19 @@ int tacacs_authorization (cmd)
     tacplus_config(configfile, 0);
 	
     int ret = build_auth_req(current_user_name, cmd, 0, 0);
-    if (ret == 0) {
-		internal_warning ("%s authorized, executing\n", cmd);
-		return 0;
-    }
+	switch (ret) {
+		case 0:
+			internal_warning ("%s authorized, executing\n", cmd);
+		break;
+		case 2:
+			/*  -2 means no servers, so already a message */
+			internal_warning ("%s not authorized by TACACS+ with given arguments, not executing\n", cmd);
+		break;
+		default:
+			internal_warning ("%s authoriz failed by TACACS+ with given arguments, not executing\n", cmd);
+		break;
+	}
 	
-    /*  -2 means no servers, so already a message */
-    if (ret != -2) {
-		internal_warning ("%s not authorized by TACACS+ with given arguments, not executing\n", cmd);
-    }
-	
-	internal_warning ("%s authoriz failed by TACACS+ with given arguments, not executing\n", cmd);
 	return ret;
     
 }
