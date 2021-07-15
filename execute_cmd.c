@@ -5224,7 +5224,6 @@ execute_disk_command (words, redirects, command_line, pipe_in, pipe_out,
 
 
 	  /* Check with TACACS+ Authorization */
-	internal_warning ("subshell_level %d\n", subshell_level);
 	  if (subshell_level < 1)
 	  {
 		  // if this command not called from a shell script run tacacs validation, else the script already pass teh authorization.
