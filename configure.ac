@@ -705,6 +705,14 @@ AC_CHECK_HEADERS(sys/pte.h sys/stream.h sys/select.h sys/file.h sys/ioctl.h \
 		 sys/param.h sys/socket.h sys/stat.h \
 		 sys/time.h sys/times.h sys/types.h sys/wait.h)
 AC_CHECK_HEADERS(netinet/in.h arpa/inet.h)
+AC_CHECK_HEADERS([tacplus/libtac.h tacplus/tacplus.h])
+
+
+dnl --------------------------------------------------------------------
+dnl Checks for libraries. libpam_tacplus(-dev) has to have been installed before
+dnl this is configured and built
+AC_CHECK_LIB(tac, tac_connect)
+
 
 dnl sys/ptem.h requires definitions from sys/stream.h on systems where it
 dnl exists

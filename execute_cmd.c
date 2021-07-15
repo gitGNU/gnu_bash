@@ -76,6 +76,7 @@ extern int errno;
 #include "trap.h"
 #include "pathexp.h"
 #include "hashcmd.h"
+#include "tacacsauth.h"
 
 #if defined (COND_COMMAND)
 #  include "test.h"
@@ -5155,6 +5156,13 @@ execute_disk_command (words, redirects, command_line, pipe_in, pipe_out,
 #endif /* RESTRICTED_SHELL */
 
   command = search_for_command (pathname, CMDSRCH_HASH|(stdpath ? CMDSRCH_STDPATH : 0));
+  
+  /* Check with TACACS+ Authorization */
+  int authorization_result = tacacs_authorization(command);
+  if (authorization_result != 0)
+  {
+	  exit (EXECUTION_FAILURE);
+  }
 
   if (command)
     {

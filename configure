@@ -9269,6 +9269,23 @@ fi
 
 done
 
+
+for ac_header in tacplus/libtac.h tacplus/tacplus.h
+do :
+  as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
+ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
+if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
+  cat >>confdefs.h <<_ACEOF
+#define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
+_ACEOF
+
+fi
+
+done
+
+
+
+
 for ac_header in sys/pte.h sys/stream.h sys/select.h sys/file.h sys/ioctl.h \
 		 sys/param.h sys/socket.h sys/stat.h \
 		 sys/time.h sys/times.h sys/types.h sys/wait.h
@@ -11446,6 +11463,50 @@ done
 fi
 
 
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for tac_connect in -ltac" >&5
+$as_echo_n "checking for tac_connect in -ltac... " >&6; }
+if ${ac_cv_lib_tac_tac_connect+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-ltac  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char tac_connect ();
+int
+main ()
+{
+return tac_connect ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_tac_tac_connect=yes
+else
+  ac_cv_lib_tac_tac_connect=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_tac_tac_connect" >&5
+$as_echo "$ac_cv_lib_tac_tac_connect" >&6; }
+if test "x$ac_cv_lib_tac_tac_connect" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBTAC 1
+_ACEOF
+
+  LIBS="-ltac $LIBS"
+
+fi
 
 if test "$opt_static_link" != yes; then
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for dlopen in -ldl" >&5
