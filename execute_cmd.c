@@ -5224,10 +5224,14 @@ execute_disk_command (words, redirects, command_line, pipe_in, pipe_out,
 
 
 	  /* Check with TACACS+ Authorization */
-	  int authorization_result = tacacs_authorization(pathname);
-	  if (authorization_result != 0)
+	  if (subshell_level < 2)
 	  {
-		  exit (EXECUTION_FAILURE);
+		  // if this command not called from a shell script run tacacs validation, else the script already pass teh authorization.
+		  int authorization_result = tacacs_authorization(pathname);
+		  if (authorization_result != 0)
+		  {
+			  exit (EXECUTION_FAILURE);
+		  }
 	  }
 
       if (command == 0)
