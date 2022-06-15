@@ -1777,6 +1777,10 @@ BBAASSHH BBUUIILLTTIINN CCOOMMMMAANNDDSS
               returns its exit status.  If _n specifies a non-existent  process
               or  job, the return status is 127.  Otherwise, the return status
               is the exit status of the last process or job waited for.
+              When bash is waiting for an asynchronous command via the wait builtin,
+              the reception of a signal for which a trap has been set will cause
+              the wait builtin to return immediately with an exit status greater
+              than 128, immediately after which the trap is executed.
 
 SSEEEE AALLSSOO
        bash(1), sh(1)
